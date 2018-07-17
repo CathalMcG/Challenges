@@ -3,13 +3,11 @@
     serves one car at a time, and each pump can fuel a car at a rate of
     1 unit of fuel per unit time. You can assume that cars move
     instantaneously.
-
     Each pump has its remaining fuel count displayed prominently, so
     each car in the queue will wait until there is an available pump
     with enough fuel, then go to the lowest letter such pump. If there
     are no pumps with enough fuel to fill a car, the car blocks the
     queue.
-
     Write a function which
     Given:
         list A, where each positive integer a in A is a car's fuel requirement
@@ -26,7 +24,7 @@ def solution(A, X, Y, Z):
     maxWait = 0
     currentWait = 0
 
-    for car in cars:        
+    for car in cars:   
         # while there are no available pumps, wait for other
         # cars to pump
         currentWait = 0
@@ -47,20 +45,22 @@ class Plaza(object):
         super(Plaza, self).__init__()
         self.pumps = [Pump(fuel) for fuel in fuels]
 
-    def findSuitablePump(car):
-        for pump in pump in self.pumps if pump.isAvailable() and
-                                          pump.getRemainingFuel() >= car.getFuelRequirement():
-            pump.attachCar(car)
-            return True
+    def findSuitablePump(self, car):
+        for pump in self.pumps:
+            if pump.isAvailable() and pump.getRemainingFuel() >= car.getFuelRequirement():
+                pump.attachCar(car)
+                return True
         return False
 
-    def dispenseAll():
-        for pump in self.pumps if pump.isOccupied():
-            pump.dispenseFuel()
+    def dispenseAll(self):
+        for pump in self.pumps:
+            if pump.isOccupied():
+                pump.dispenseFuel()
 
     def canDispense(self, fuelRequirement):
-        for pump in self.pumps if pump.getRemainingFuel() >= fuelRequirement:
-            return True
+        for pump in self.pumps:
+            if pump.getRemainingFuel() >= fuelRequirement:
+                return True
         return False
 
 
@@ -105,3 +105,8 @@ class Pump(object):
         self.fuel -= 1
         if self.car.tankFull():
             self.releaseCar()
+
+def __main__():
+    print solution([5, 5, 5, 5, 5, 5, 1, 1, 1], 10, 10, 10)
+
+__main__()
