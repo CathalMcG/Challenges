@@ -105,8 +105,3 @@ class Pump(object):
         self.fuel -= 1
         if self.car.tankFull():
             self.releaseCar()
-
-def __main__():
-    print solution([5, 5, 5, 5, 5, 5, 1, 1, 1], 10, 10, 10)
-
-__main__()
